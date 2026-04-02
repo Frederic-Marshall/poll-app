@@ -13,7 +13,7 @@ class VotePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->checkPermissionTo('view-any Vote');
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class VotePolicy
      */
     public function view(User $user, Vote $vote): bool
     {
-        return $user->checkPermissionTo('view Vote');
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class VotePolicy
      */
     public function create(User $user): bool
     {
-        return $user->checkPermissionTo('create Vote');
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class VotePolicy
      */
     public function update(User $user, Vote $vote): bool
     {
-        return $user->checkPermissionTo('update Vote');
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class VotePolicy
      */
     public function delete(User $user, Vote $vote): bool
     {
-        return $user->checkPermissionTo('delete Vote');
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class VotePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->checkPermissionTo('delete-any Vote');
+        return true;
     }
 
     /**
@@ -61,7 +61,7 @@ class VotePolicy
      */
     public function restore(User $user, Vote $vote): bool
     {
-        return $user->checkPermissionTo('restore Vote');
+        return true;
     }
 
     /**
@@ -69,7 +69,7 @@ class VotePolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->checkPermissionTo('restore-any Vote');
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class VotePolicy
      */
     public function replicate(User $user, Vote $vote): bool
     {
-        return $user->checkPermissionTo('replicate Vote');
+        return true;
     }
 
     /**
@@ -85,7 +85,7 @@ class VotePolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->checkPermissionTo('reorder Vote');
+        return true;
     }
 
     /**
@@ -93,7 +93,7 @@ class VotePolicy
      */
     public function forceDelete(User $user, Vote $vote): bool
     {
-        return $user->checkPermissionTo('force-delete Vote');
+        return true;
     }
 
     /**
@@ -101,6 +101,6 @@ class VotePolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->checkPermissionTo('force-delete-any Vote');
+        return true;
     }
 }

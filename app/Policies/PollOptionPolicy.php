@@ -13,7 +13,7 @@ class PollOptionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->checkPermissionTo('view-any PollOption');
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class PollOptionPolicy
      */
     public function view(User $user, PollOption $polloption): bool
     {
-        return $user->checkPermissionTo('view PollOption');
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class PollOptionPolicy
      */
     public function create(User $user): bool
     {
-        return $user->checkPermissionTo('create PollOption');
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class PollOptionPolicy
      */
     public function update(User $user, PollOption $polloption): bool
     {
-        return $user->checkPermissionTo('update PollOption');
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class PollOptionPolicy
      */
     public function delete(User $user, PollOption $polloption): bool
     {
-        return $user->checkPermissionTo('delete PollOption');
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class PollOptionPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->checkPermissionTo('delete-any PollOption');
+        return true;
     }
 
     /**
@@ -61,7 +61,7 @@ class PollOptionPolicy
      */
     public function restore(User $user, PollOption $polloption): bool
     {
-        return $user->checkPermissionTo('restore PollOption');
+        return true;
     }
 
     /**
@@ -69,7 +69,7 @@ class PollOptionPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->checkPermissionTo('restore-any PollOption');
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class PollOptionPolicy
      */
     public function replicate(User $user, PollOption $polloption): bool
     {
-        return $user->checkPermissionTo('replicate PollOption');
+        return true;
     }
 
     /**
@@ -85,7 +85,7 @@ class PollOptionPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->checkPermissionTo('reorder PollOption');
+        return true;
     }
 
     /**
@@ -93,7 +93,7 @@ class PollOptionPolicy
      */
     public function forceDelete(User $user, PollOption $polloption): bool
     {
-        return $user->checkPermissionTo('force-delete PollOption');
+        return true;
     }
 
     /**
@@ -101,6 +101,6 @@ class PollOptionPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->checkPermissionTo('force-delete-any PollOption');
+        return true;
     }
 }

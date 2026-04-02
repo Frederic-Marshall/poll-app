@@ -21,7 +21,7 @@ class PollPolicy
      */
     public function view(User $user, Poll $poll): bool
     {
-        return $user->checkPermissionTo('view Poll');
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class PollPolicy
      */
     public function create(User $user): bool
     {
-        return $user->checkPermissionTo('create Poll');
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class PollPolicy
      */
     public function update(User $user, Poll $poll): bool
     {
-        return $user->checkPermissionTo('update Poll');
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class PollPolicy
      */
     public function delete(User $user, Poll $poll): bool
     {
-        return $user->checkPermissionTo('delete Poll');
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class PollPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->checkPermissionTo('delete-any Poll');
+        return true;
     }
 
     /**
@@ -61,7 +61,7 @@ class PollPolicy
      */
     public function restore(User $user, Poll $poll): bool
     {
-        return $user->checkPermissionTo('restore Poll');
+        return true;
     }
 
     /**
@@ -69,7 +69,7 @@ class PollPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->checkPermissionTo('restore-any Poll');
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class PollPolicy
      */
     public function replicate(User $user, Poll $poll): bool
     {
-        return $user->checkPermissionTo('replicate Poll');
+        return true;
     }
 
     /**
@@ -85,7 +85,7 @@ class PollPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->checkPermissionTo('reorder Poll');
+        return true;
     }
 
     /**
@@ -93,7 +93,7 @@ class PollPolicy
      */
     public function forceDelete(User $user, Poll $poll): bool
     {
-        return $user->checkPermissionTo('force-delete Poll');
+        return true;
     }
 
     /**
@@ -101,6 +101,6 @@ class PollPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->checkPermissionTo('force-delete-any Poll');
+        return true;
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Enums\PollStatus;
+use App\Events\PollCreated;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -44,10 +46,21 @@ class Poll extends Model implements HasMedia
         return 'join_code';
     }
 
-    protected static function booted()
+    protected static function booted(): void
     {
         static::creating(function ($poll) {
             $poll->join_code = strtoupper(Str::random(8));
+        });
+
+        static::created(function ($poll) {
+            Log::info('Создан Poll: ' . 'poll_id  => ' . $poll->id);
+
+            broadcast(new PollCreated([
+                'id' => $poll->id,
+                'title' => $poll->title,
+                'description' => $poll->description,
+                'join_code' => $poll->join_code,
+            ]));
         });
     }
 }
