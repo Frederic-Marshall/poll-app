@@ -26,4 +26,9 @@ class UserController extends Controller
 
         return redirect()->route('users.show', $user)->with(['success', 'Пользователь обновлен']);
     }
+
+    public function chatSearch()
+    {
+        // TODO: поиск пользователей для общения
+    }
 }

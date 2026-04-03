@@ -36,6 +36,12 @@ class User extends Authenticatable
 //        return $this->can('admin_panel', $panel);
 //    }
 
+    public function getRouteKeyName()
+    {
+        return 'nickname';
+    }
+
+    // Relations
     public function polls()
     {
         return $this->hasMany(Poll::class);
@@ -46,8 +52,13 @@ class User extends Authenticatable
         return $this->hasMany(Vote::class);
     }
 
-    public function getRouteKeyName()
+    public function chats()
     {
-        return 'nickname';
+        return $this->BelongsToMany(Chat::class, 'chat_user');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
     }
 }

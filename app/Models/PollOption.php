@@ -13,16 +13,6 @@ class PollOption extends Model implements HasMedia
     protected $fillable = ['text', 'poll_id'];
     protected $table = 'poll_options';
 
-    public function poll()
-    {
-        return $this->belongsTo(Poll::class);
-    }
-
-    public function votes()
-    {
-        return $this->hasMany(Vote::class, 'option_id');
-    }
-
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images')->singleFile()->useDisk('public');
@@ -43,5 +33,16 @@ class PollOption extends Model implements HasMedia
         });
 
         return $options;
+    }
+
+    // Relations
+    public function poll()
+    {
+        return $this->belongsTo(Poll::class);
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'option_id');
     }
 }

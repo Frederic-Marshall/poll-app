@@ -20,6 +20,7 @@
             </div>
 
             <div class="hidden lg:flex lg:gap-6">
+                <a href="{{ route('chats.index') }}" class="hover:text-blue-400 transition-colors">Чаты</a>
                 <a href="{{ route('polls.index') }}" class="hover:text-blue-400 transition-colors">Список опросов</a>
                 @auth
                     <a href="{{ route('users.show', auth()->user()) }}" class="hover:text-blue-400 transition-colors">Профиль</a>

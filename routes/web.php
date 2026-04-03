@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Messanger\ChatController;
 use App\Http\Controllers\Poll\PollController;
 use \App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,12 @@ Route::middleware('auth')->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('{poll:join_code}', 'show')->name('show');
         Route::post('{poll:join_code}/vote', 'vote')->name('vote');
+    });
+
+    Route::prefix('chats')->name('chats.')->controller(ChatController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+
+        Route::post('private', 'privateChat')->name('private');
+        Route::get('{chat:id}', 'showChat')->name('show');
     });
 });

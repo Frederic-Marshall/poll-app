@@ -12,6 +12,7 @@ class Vote extends Model
         'option_id',
     ];
 
+    // Relations
     public function poll()
     {
         return $this->belongsTo(Poll::class);

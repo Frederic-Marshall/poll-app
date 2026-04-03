@@ -26,21 +26,6 @@ class Poll extends Model implements HasMedia
         'status' => PollStatus::class,
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function options()
-    {
-        return $this->hasMany(PollOption::class);
-    }
-
-    public function votes()
-    {
-        return $this->hasMany(Vote::class);
-    }
-
     public function getRouteKeyName()
     {
         return 'join_code';
@@ -62,5 +47,21 @@ class Poll extends Model implements HasMedia
                 'join_code' => $poll->join_code,
             ]));
         });
+    }
+
+    // Relations
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function options()
+    {
+        return $this->hasMany(PollOption::class);
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
     }
 }
