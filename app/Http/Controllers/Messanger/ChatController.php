@@ -60,10 +60,10 @@ class ChatController extends Controller
     public function showChat(Chat $chat)
     {
         $this->authorize('view', $chat);
+        $chat->load(['users', 'messages' => fn ($query) => $query->latest()->take(50)->orderBy('created_at')]);
+        $chat->messages = $chat->messages->reverse()->values();
 
-        $chat->load(['users', 'messages' => fn ($query) => $query->latest()->take(50)]);
-
-        return view('messanger.chat.show', compact('chat'));
+        return view('messanger.chats.chat', compact('chat'));
     }
 
     public function deletePrivateChat()

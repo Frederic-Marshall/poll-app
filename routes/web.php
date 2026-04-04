@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Messanger\ChatController;
 use App\Http\Controllers\Poll\PollController;
 use \App\Http\Controllers\User\UserController;
+use \App\Http\Controllers\Messanger\MessageController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -42,5 +43,12 @@ Route::middleware('auth')->group(function () {
 
         Route::post('private', 'privateChat')->name('private');
         Route::get('{chat:id}', 'showChat')->name('show');
+
+//        Route::post('send', [MessageController::class, 'send'])->name('send');
     });
+
+
+});
+Route::middleware(['auth', 'web'])->group(function () {
+    Route::post('send', [MessageController::class, 'send'])->name('send');
 });

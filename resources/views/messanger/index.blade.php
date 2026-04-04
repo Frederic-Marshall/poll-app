@@ -26,9 +26,7 @@
             </template>
         </div>
 
-        <div class="flex-1 bg-gray-900 p-4 overflow-y-auto rounded-l-xl" id="chat-window">
-            @yield('chat')
-        </div>
+        <div class="flex-1 bg-gray-900 p-4 overflow-y-auto rounded-l-xl" id="chat-window"></div>
 
     </div>
 
@@ -36,30 +34,50 @@
         function chatList(startChats) {
             return {
                 chats: startChats,
+
                 init() {
-                    Echo.channel(`user.{{ auth()->id() }}`)
-                        .listen('MessageSent', (e) => {
-                            let chatIndex = this.chats.findIndex(c => c.id === e.message.chat_id);
-                            if (chatIndex !== -1) {
-                                this.chats[chatIndex].lastMessage = e.message;
-                                this.chats[chatIndex].updated_at = e.message.created_at;
-
-                                let chat = this.chats.splice(chatIndex, 1)[0];
-                                this.chats.unshift(chat);
-                            } else {
-                                this.chats.unshift(e.chat);
-                            }
-                        });
-
-                    // Слушаем выбор чата из списка
+                    this.subscribeToChats()
                     window.addEventListener('chat-selected', (event) => {
-                        const chat = event.detail;
-                        fetch(`/chats/${chat.id}`)
-                            .then(res => res.text())
-                            .then(html => {
-                                document.getElementById('chat-window').innerHTML = html;
-                            });
-                    });
+                        this.openChat(event.detail.id)
+                    })
+                },
+
+                subscribeToChats() {
+                    this.chats.forEach(chat => {
+                        Echo.private(`chat.${chat.id}`)
+                            .listen('MessageSent', (e) => {
+                                this.updateChat(e)
+                            })
+                    })
+                },
+
+                updateChat(e) {
+                    const chatIndex = this.chats.findIndex(c => c.id === e.message.chat_id)
+
+                    if (chatIndex !== -1) {
+                        this.chats[chatIndex].lastMessage = e.message
+                        this.chats[chatIndex].updated_at = e.message.created_at
+
+                        const chat = this.chats.splice(chatIndex, 1)[0]
+                        this.chats.unshift(chat)
+
+                    } else if (e.chat) {
+                        this.chats.unshift(e.chat)
+                        Echo.private(`chat.${e.chat.id}`)
+                            .listen('MessageSent', (e) => {
+                                this.updateChat(e)
+                            })
+                    }
+                },
+
+                openChat(chatId) {
+                    fetch(`/chats/${chatId}`)
+                        .then(res => res.text())
+                        .then(html => {
+                            const el = document.getElementById('chat-window');
+                            el.innerHTML = html;
+                            Alpine.initTree(el);
+                        })
                 }
             }
         }

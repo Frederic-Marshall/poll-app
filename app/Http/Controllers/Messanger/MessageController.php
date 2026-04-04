@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Messanger;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Messanger\MessageRequest;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
 use Illuminate\Http\Request;
 
@@ -13,9 +15,14 @@ class MessageController extends Controller
         // TODO: подгрузка старых сообщений
     }
 
-    public function store(Request $request)
+    public function send(MessageRequest $request)
     {
-        // TODO: написать сообщение
+        $data = $request->validated();
+        $data['sender_id'] = auth()->id();
+        
+        $message = Message::create($data);
+
+        return response()->json(MessageResource::make($message));
     }
 
     public function delete(Message $message)
