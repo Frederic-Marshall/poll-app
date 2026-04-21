@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
 
 class Poll extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, HasTranslations;
 
     protected $fillable = [
         'user_id',
@@ -21,6 +22,8 @@ class Poll extends Model implements HasMedia
         'status',
         'join_code',
     ];
+
+    public $translatable = ['title', 'description'];
 
     protected $casts = [
         'status' => PollStatus::class,
